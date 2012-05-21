@@ -1,0 +1,22 @@
+%ul.pager
+  %li.previous
+    =link_to raw("&larr;#{l(@prev,:format=>:long)}"),daily_path(:day=>@prev.day,:month=>@prev.month,:year=>@prev.year)
+  %li.next
+    =link_to raw("#{l(@succ,:format=>:long)}&rarr;"),daily_path(:day=>@succ.day,:month=>@succ.month,:year=>@succ.year)
+
+
+%h1=l(@date,:format=>"%d %B %Y, %A")
+-if @events.blank?
+  .alert.alert-info
+    Событий не найдено
+-else
+  %table.table
+    %tbody
+      -@events.each do |event|
+        %tr
+          %td=l(event.start_at,:format=>"%H:%M")
+          %td=link_to event.name,event
+          %td=event.human_mask
+          %td=render 'menu',:event=>event
+
+

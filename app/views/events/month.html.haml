@@ -1,0 +1,24 @@
+-date=@date.beginning_of_week
+%ul.pager
+  %li.previous
+    =link_to raw("&larr;#{l(@prev,:format=>"%B %Y")}"),monthly_path(:month=>@prev.month,:year=>@prev.year)
+  %li.next
+    =link_to raw("#{l(@succ,:format=>"%B %Y")}&rarr;"),monthly_path(:month=>@succ.month,:year=>@succ.year)
+
+
+%h1=l(@date,:format=>"%B %Y")
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th
+      -7.times do |i|
+        %th=t('date.day_names')[(i+1)%7]
+  %tbody
+    -while date <@date || date.month==@month
+      %tr
+        %td=link_to date.cweek,weekly_path(:week=>date.cweek,:year=>date.year)
+        -7.times do
+          =render 'month_day',:date=>date
+          -date=date+1.day
+

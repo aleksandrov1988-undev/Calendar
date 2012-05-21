@@ -1,0 +1,16 @@
+.row-fluid
+  .span9
+    %h1
+      =@event.name
+      =render 'menu',:event=>@event
+  .span3
+    %h3=l(@event.start_at,:format=>:long)
+    =@event.human_mask
+-if @event.weekly?
+  .row-fluid
+    -7.times do |i|
+      =wday_badge(@event,i+1)
+-if @event.monthly?
+  .row-fluid
+    -31.times do |i|
+      =day_badge(@event,i+1)

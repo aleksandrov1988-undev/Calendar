@@ -1,0 +1,19 @@
+== Install
+
+  bundle exec rake db:create db:migrate db:seed
+
+
+
+
+== Rubygems
+
+
+При написании проекта использовались:
+
+1. <tt>haml</tt>, <tt>haml-rails</tt>;
+
+2. <tt>twitter-bootstrap-rails</tt>;
+
+3. <tt>russian</tt>;
+
+4. <tt>rspec-rails</tt>.

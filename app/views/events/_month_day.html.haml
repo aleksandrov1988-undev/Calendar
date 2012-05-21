@@ -1,0 +1,9 @@
+%td
+  %span.label{:class=>date.month==@month ? (date.cwday==7 ? 'label-important' : 'label-info') : nil}
+    =link_to l(date,:format=>"%d %B"),daily_path(:day=>date.day,:month=>date.month,:year=>date.year)
+  -if date.month==@month
+    -@events.each do |event|
+      -if event.today?(date)
+        .event
+          %strong=l event.start_at,:format=>"%H:%M"
+          =link_to truncate(event.name),event

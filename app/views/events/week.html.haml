@@ -1,0 +1,30 @@
+%ul.pager
+  %li.previous
+    =link_to raw("&larr;Предыдущая неделя"),weekly_path(:week=>@prev.cweek,:year=>@prev.year)
+  %li.next
+    =link_to raw("Следующая неделя&rarr;"),weekly_path(:week=>@succ.cweek,:year=>@succ.year)
+
+
+%h1=raw "#{l(@date,:format=>"%d %B %Y")}&nbsp;&mdash;&nbsp;#{l(@date+6.days,:format=>"%d %B %Y")}"
+
+
+%table.table
+  %tbody
+    -7.times do |i|
+      -date=@date+i.days
+      -any=false
+      %tr
+        %th.center.gray_bg{:colspan=>4}=l(date,:format=>"%A, %d %B")
+      -@events.each do |event|
+        -if event.today?(date)
+          -any=true
+          %tr
+            %td=l(event.start_at,:format=>"%H:%M")
+            %td=link_to event.name,event
+            %td=event.human_mask
+            %td=render 'menu',:event=>event
+      -unless any
+        %tr
+          %th.center{:colspan=>4}
+            %span.label Событий не найдено
+

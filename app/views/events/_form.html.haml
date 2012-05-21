@@ -1,0 +1,32 @@
+=form_for @event ,:html=>{:class=>"form-horizontal event-form"} do |f|
+  -if @event.errors.any?
+    .alert.alert-error
+      %h4.alert-heading При сохранении произошли ошибки
+      %ul
+        -@event.errors.full_messages.each do |msg|
+          %li=msg
+  %fieldset
+    .control-group
+      =f.label :name,:class=>'control-label'
+      .controls
+        =f.text_field :name,:class=>"span9"
+    .control-group
+      =f.label :start_at,:class=>"control-label"
+      .controls
+        =f.datetime_select :start_at,{:start_year=>Date.today.year},{:class=>"input-mini"}
+    .control-group
+      %label.control-label=Event.human_attribute_name :mode
+      .controls
+        -Event::MODE_TYPES.each_with_index do |mode,i|
+          %label.radio
+            =f.radio_button :mode,i,:class=>"mode-radio",'data-force'=>@event.mode==i ? '1' : nil
+            =mode
+    .control-group.mask-row
+      =f.hidden_field :mask
+      %label.control-label=Event.human_attribute_name :mask
+      .controls
+        .btn-group
+          -31.times do |i|
+            =mask_label(@event,i)
+    .form-actions
+      =f.submit nil,:class=>"btn btn-primary"

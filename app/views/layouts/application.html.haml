@@ -1,0 +1,37 @@
+!!!
+%html{:lang => "ru"}
+  %head
+    %meta{:charset => "utf-8"}
+    %title= content_for?(:title) ? yield(:title) : "Календарь"
+    = csrf_meta_tags
+    / Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
+    / Le styles
+    = stylesheet_link_tag    "application"
+
+
+
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+          %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+            %span.i-bar
+            %span.i-bar
+            %span.i-bar
+          =link_to "Календарь",root_path,:class=>"brand"
+          .container-fluid.nav-collapse
+            %ul.nav
+              %li= link_to "Новое событие", new_event_path
+              %li= link_to "День", daily_path
+              %li= link_to "Неделя", weekly_path
+              %li= link_to "Месяц", monthly_path
+
+    .container-fluid
+      -if notice.present?
+        .alert.alert-success=notice
+      .row-fluid
+        .span12
+          = yield
+    = javascript_include_tag "application"

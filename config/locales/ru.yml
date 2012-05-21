@@ -1,0 +1,13 @@
+ru:
+  helpers:
+    submit:
+      create: "Создать"
+      update: "Сохранить"
+      submit: "Сохранить"
+  activerecord:
+    attributes:
+      event:
+        name: "Название"
+        start_at: "Дата и время начала"
+        mode: "Периодичность"
+        mask: "Параметры периодичности"
